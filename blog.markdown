@@ -1,7 +1,10 @@
 ---
-# Feel free to add content and custom Front Matter to this file.
-# To modify the layout, see https://jekyllrb.com/docs/themes/#overriding-theme-defaults
-
 layout: home
+title: Blog
+permalink: /blog/
+redirect_from:
+  - /blog
+  - /blog.html
 ---
-[Check] Ramdom Information Block -- Blog.com
+
+Notes on engineering, learning, and personal projects.

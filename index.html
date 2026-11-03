@@ -1,18 +1,22 @@
 ---
 layout: page
-title: Home
+title: Lee Long Sheng
 ---
-<!DOCTYPE html>
-<html>
-  <head>
-    <title>Home</title>
-  </head>
-  <body>
-    <h1>Hello World!</h1>
-    <h1>Career</h1>
-    <a href="cv">CV</a>
-    <h1>Personal</h1>
-    <a href="blog">Blog</a>
-  </body>
-</html>
+<div class="brief_intro">
+  <p>Hi, I'm an engineer. This is my space for notes on engineering, learning, and personal projects.</p>
+</div>
 
+<div class="home-links">
+  <section aria-labelledby="cv-heading">
+    <h2 id="cv-heading"><a href="{{ '/cv/' | relative_url }}">CV</a></h2>
+    <p>View my curriculum vitae.</p>
+  </section>
+  <section aria-labelledby="blog-heading">
+    <h2 id="blog-heading"><a href="{{ '/blog/' | relative_url }}">Blog</a></h2>
+    <p>Notes, ideas, and things I'm learning.</p>
+  </section>
+  <section aria-labelledby="about-heading">
+    <h2 id="about-heading"><a href="{{ '/about/' | relative_url }}">About</a></h2>
+    <p>A little about me and how to get in touch.</p>
+  </section>
+</div>
