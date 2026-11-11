@@ -6,3 +6,6 @@ Gemfile
 Gemfile.lock
 __pycache__/
 *.pyc
+.DS_Store
+/Personal/
+/.hermes/

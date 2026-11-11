@@ -104,10 +104,22 @@ a {
 .post-link { font-size: 23px; font-weight: 500; }
 
 .brief_intro {
+  display: flex;
+  align-items: center;
+  gap: 24px;
   max-width: 580px;
   font-size: 20px;
   color: $grey-color;
   margin-bottom: 44px;
+}
+.brief_intro p { min-width: 0; margin: 0; }
+.brief_intro .profile-picture {
+  display: block;
+  flex-shrink: 0;
+  width: 160px;
+  max-width: 35%;
+  height: auto;
+  border-radius: 8px;
 }
 .home-links section {
   border-top: 1px solid $grey-color-light;
@@ -135,12 +147,15 @@ a {
 .footer-links { display: flex; gap: 20px; }
 .footer-links a { display: inline-flex; align-items: center; min-height: 44px; }
 
+.error-page { max-width: 580px; margin: 0 auto; }
+.error-page h1 { font-size: 64px; line-height: 1.1; }
+
 @media (max-width: 600px) {
   .wrapper { padding-left: 24px; padding-right: 24px; }
   .site-header { padding: 12px 0; }
   .site-nav { width: 100%; }
   .page-content { padding: 40px 0 56px; }
-  .brief_intro { font-size: 18px; margin-bottom: 32px; }
+  .brief_intro { gap: 16px; font-size: 18px; margin-bottom: 32px; }
 }
 
 @media print {

@@ -13,7 +13,6 @@ plugins:
   - jekyll-redirect-from
 
 header_pages:
-  - index.html
   - cv.markdown
   - blog.markdown
   - about.markdown
@@ -24,4 +23,5 @@ exclude:
   - memory.md
   - jekyll_livereload.sh
   - tests
+  - Personal
   - vendor

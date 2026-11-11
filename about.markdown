@@ -1,13 +1,10 @@
 ---
 layout: page
-title: About
+title: Contact
 permalink: /about/
 ---
 
-I'm Kenny, an engineer. This is my personal space for notes on engineering,
-learning, and personal projects.
-
-## Contact
+You can reach me by email or find me on LinkedIn and GitHub.
 
 - [LinkedIn](https://www.linkedin.com/in/kennylongsheng/)
 - [GitHub](https://github.com/{{ site.github_username }})
