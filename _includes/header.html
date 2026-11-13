@@ -1,0 +1,34 @@
+{%- assign current_lang = page.lang | default: site.lang | default: 'en' -%}
+{%- assign locale = site.data.locales[current_lang] -%}
+<header class="site-header" role="banner">
+  <div class="wrapper">
+    <a class="site-title" rel="author" href="{{ locale.home | relative_url }}">{{ site.title | escape }}</a>
+    <nav class="site-nav" aria-label="{{ locale.navigation | escape }}">
+      <div class="trigger">
+        {%- for path in site.header_pages -%}
+          {%- assign source_page = site.pages | where: 'path', path | first -%}
+          {%- assign target = site.pages | where: 'translation_key', source_page.translation_key | where: 'lang', current_lang | first -%}
+          {%- if target -%}
+            <a class="page-link" href="{{ target.url | relative_url }}"{% if page.url == target.url %} aria-current="page"{% endif %}>{{ target.title | escape }}</a>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </nav>
+    <nav class="language-switch" aria-label="{{ locale.language | escape }}">
+      {%- if page.translation_key -%}
+        {%- assign counterparts = site.pages | where: 'translation_key', page.translation_key -%}
+        {%- assign english = counterparts | where: 'lang', 'en' | first -%}
+        {%- assign chinese = counterparts | where: 'lang', 'zh-Hant' | first -%}
+      {%- else -%}
+        {%- assign english = page -%}
+        {%- assign chinese = site.pages | where: 'translation_key', 'blog' | where: 'lang', 'zh-Hant' | first -%}
+      {%- endif -%}
+      {%- if english -%}
+        <a href="{{ english.url | relative_url }}" lang="en" hreflang="en"{% if current_lang == 'en' %} aria-current="page"{% endif %}>ENG</a>
+      {%- endif -%}
+      {%- if chinese -%}
+        <a href="{{ chinese.url | relative_url }}" lang="zh-Hant" hreflang="zh-Hant"{% if current_lang == 'zh-Hant' %} aria-current="page"{% endif %}{% unless page.translation_key %} aria-label="繁體中文文章列表，本文尚無翻譯"{% endunless %}>繁體中文{% unless page.translation_key %}<span class="language-context">文章列表</span>{% endunless %}</a>
+      {%- endif -%}
+    </nav>
+  </div>
+</header>

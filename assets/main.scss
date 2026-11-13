@@ -1,7 +1,7 @@
 ---
 ---
 // Keep Minima's layouts and code highlighting; customize its visual defaults.
-$base-font-family: "Avenir Next", Avenir, "Segoe UI", sans-serif;
+$base-font-family: "Avenir Next", Avenir, "Segoe UI", "PingFang TC", "Microsoft JhengHei", sans-serif;
 $base-font-size: 17px;
 $base-line-height: 1.7;
 $content-width: 840px;
@@ -55,8 +55,9 @@ a {
   padding: 8px 0;
 }
 
-// Four short links fit without a hidden hamburger menu, even on small screens.
+// Keep navigation visible and wrapping naturally in both languages.
 .site-nav {
+  margin-left: auto;
   float: none;
   position: static;
   border: 0;
@@ -64,8 +65,7 @@ a {
   line-height: 1.5;
   text-align: left;
 
-  label[for="nav-trigger"], .menu-icon { display: none; }
-  input ~ .trigger, input:checked ~ .trigger {
+  .trigger {
     display: flex;
     flex-wrap: wrap;
     gap: 0 24px;
@@ -82,6 +82,29 @@ a {
   }
   .page-link:hover { color: $brand-color; }
 }
+
+.language-switch {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-size: 13px;
+  white-space: nowrap;
+}
+.language-switch a {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-height: 44px;
+  color: $grey-color;
+}
+.language-switch a[aria-current="page"],
+.site-nav a[aria-current="page"] {
+  color: $text-color;
+  text-decoration: underline;
+  text-decoration-thickness: 2px;
+}
+.language-context { font-size: 11px; }
+html[lang="zh-Hant"] .post-title { letter-spacing: 0; }
 
 .page-content { padding: 64px 0 80px; }
 .post-header { margin-bottom: 28px; }
@@ -106,32 +129,78 @@ a {
 .brief_intro {
   display: flex;
   align-items: center;
-  gap: 24px;
-  max-width: 580px;
-  font-size: 20px;
-  color: $grey-color;
-  margin-bottom: 44px;
+  gap: 32px;
+  margin-bottom: 28px;
 }
-.brief_intro p { min-width: 0; margin: 0; }
+.profile-introduction { min-width: 0; }
+.profile-introduction p { margin: 0 0 12px; }
+.profile-introduction p:last-child { margin-bottom: 0; }
+.profile-introduction .profile-role {
+  color: $brand-color;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+}
+.profile-introduction > p:not(.profile-role):not(.profile-detail) {
+  font-size: 21px;
+  line-height: 1.5;
+}
+.profile-detail { color: $grey-color; font-size: 16px; }
 .brief_intro .profile-picture {
   display: block;
   flex-shrink: 0;
-  width: 160px;
-  max-width: 35%;
+  width: 144px;
+  max-width: 30%;
   height: auto;
-  border-radius: 8px;
+  border-radius: 6px;
 }
-.home-links section {
+.profile-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px 24px;
+}
+.profile-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 4px 20px;
+  border: 1px solid $brand-color;
+  border-radius: 4px;
+  background: $brand-color;
+  color: white;
+  font-size: 15px;
+  font-weight: 600;
+  &:visited { color: white; }
+  &:hover { background: $text-color; border-color: $text-color; color: white; }
+}
+.profile-download { display: inline-flex; align-items: center; gap: 6px; min-height: 44px; }
+.profile-download span { color: $grey-color; font-size: 14px; }
+.resume-version { margin: 10px 0 40px; color: $grey-color; font-size: 13px; }
+.profile-section {
   border-top: 1px solid $grey-color-light;
-  padding: 24px 0;
+  padding: 28px 0 32px;
+  h2 { margin: 0 0 22px; }
+  h3 { font-size: 19px; margin-bottom: 8px; }
+  p:last-child { margin-bottom: 0; }
 }
-.home-links h2 {
-  font-size: 21px;
-  margin: 0 0 6px;
+.post-content .profile-section h2 { margin-top: 0; }
+.experience-heading { margin-bottom: 18px; }
+.experience-heading h3 { margin-bottom: 2px; }
+.experience-heading p { color: $grey-color; font-size: 14px; }
+.profile-list { margin-bottom: 20px; }
+.profile-list li { margin-bottom: 8px; }
+.section-link { display: inline-flex; align-items: center; min-height: 44px; font-size: 15px; }
+.profile-skills {
+  margin-bottom: 0;
+  > div { display: flex; gap: 24px; padding: 12px 0; }
+  > div:first-child { padding-top: 0; }
+  dt { flex: 0 0 170px; font-weight: 600; font-size: 15px; }
+  dd { min-width: 0; margin: 0; color: $grey-color; font-size: 16px; }
 }
-.home-links p { margin: 0; color: $grey-color; }
-.home-links h2 a { color: $text-color; }
-.home-links h2 a:hover { color: $brand-color; }
+.profile-closing { padding-bottom: 0; }
+.resume-download { margin: 24px 0; }
 
 .site-footer { padding: 24px 0; }
 .footer-inner {
@@ -153,9 +222,15 @@ a {
 @media (max-width: 600px) {
   .wrapper { padding-left: 24px; padding-right: 24px; }
   .site-header { padding: 12px 0; }
-  .site-nav { width: 100%; }
+  .site-nav { order: 3; width: 100%; margin-left: 0; }
+  .language-switch { margin-left: auto; }
   .page-content { padding: 40px 0 56px; }
-  .brief_intro { gap: 16px; font-size: 18px; margin-bottom: 32px; }
+  .brief_intro { align-items: flex-start; gap: 16px; }
+  .profile-introduction > p:not(.profile-role):not(.profile-detail) { font-size: 18px; }
+  .profile-detail { font-size: 15px; }
+  .profile-skills > div { display: block; }
+  .profile-skills dt { margin-bottom: 4px; }
+  .profile-section { padding: 24px 0; }
 }
 
 @media print {

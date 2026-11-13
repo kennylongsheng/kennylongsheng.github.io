@@ -1,0 +1,18 @@
+en:
+  home: /
+  navigation: Main navigation
+  language: Website language
+  contact_links: Contact links
+  email: Email
+  posts: Posts
+  rss: Subscribe via RSS
+  date_format: "%b %-d, %Y"
+zh-Hant:
+  home: /zh-tw/
+  navigation: 主要導覽
+  language: 網站語言
+  contact_links: 聯絡連結
+  email: 電子郵件
+  posts: 文章
+  rss: 訂閱 RSS
+  date_format: "%Y 年 %-m 月 %-d 日"

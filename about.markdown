@@ -1,6 +1,9 @@
 ---
 layout: page
 title: Contact
+lang: en
+translation_key: contact
+description: Contact Lee Long Sheng by email, LinkedIn, or GitHub.
 permalink: /about/
 ---
 

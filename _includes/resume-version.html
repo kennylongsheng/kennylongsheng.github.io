@@ -1,0 +1,5 @@
+{%- if page.lang == 'zh-Hant' -%}
+  {{- site.resume_version | date: '%Y 年 %-m 月' | escape -}}
+{%- else -%}
+  {{- site.resume_version | escape -}}
+{%- endif -%}

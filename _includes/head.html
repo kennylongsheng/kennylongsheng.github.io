@@ -1,0 +1,20 @@
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {%- seo -%}
+  {%- if page.translation_key -%}
+    {%- assign translations = site.pages | where: 'translation_key', page.translation_key -%}
+    {%- for translation in translations -%}
+      <link rel="alternate" hreflang="{{ translation.lang | escape }}" href="{{ translation.url | absolute_url }}">
+      {%- if translation.lang == 'en' -%}
+        <link rel="alternate" hreflang="x-default" href="{{ translation.url | absolute_url }}">
+      {%- endif -%}
+    {%- endfor -%}
+  {%- endif -%}
+  <link rel="stylesheet" href="{{ '/assets/main.css' | relative_url }}">
+  {%- feed_meta -%}
+  {%- if jekyll.environment == 'production' and site.google_analytics -%}
+    {%- include google-analytics.html -%}
+  {%- endif -%}
+</head>

@@ -1,23 +1,56 @@
 ---
 layout: page
 title: Lee Long Sheng
+lang: en
+translation_key: home
+description: DRAM firmware and IC verification. Professional experience, technical background, and resume.
 ---
 <div class="brief_intro">
   <img class="profile-picture" src="{{ '/assets/images/profile-small.jpg' | relative_url }}" alt="Portrait of Lee Long Sheng" width="384" height="480">
-  <p>Hi, I'm an engineer. I share notes on engineering, learning, and personal projects here.</p>
+  <div class="profile-introduction">
+    <p class="profile-role">Firmware Engineer · DRAM &amp; IC Verification</p>
+    <p>I develop firmware and verification tests for DRAM-based systems.</p>
+    <p class="profile-detail">My work connects memory specifications, FPGA and ASIC verification, and failure investigation.</p>
+  </div>
 </div>
 
-<div class="home-links">
-  <section aria-labelledby="cv-heading">
-    <h2 id="cv-heading"><a href="{{ '/cv/' | relative_url }}">CV</a></h2>
-    <p>View my curriculum vitae.</p>
-  </section>
-  <section aria-labelledby="blog-heading">
-    <h2 id="blog-heading"><a href="{{ '/blog/' | relative_url }}">Blog</a></h2>
-    <p>Notes, ideas, and things I'm learning.</p>
-  </section>
-  <section aria-labelledby="contact-heading">
-    <h2 id="contact-heading"><a href="{{ '/about/' | relative_url }}">Contact</a></h2>
-    <p>Email, LinkedIn, and GitHub.</p>
-  </section>
-</div>
+<nav class="profile-actions" aria-label="Professional profile">
+  <a class="profile-button" href="{{ '/cv/' | relative_url }}">Read my CV</a>
+  <a class="profile-download" href="{{ site.resume_pdf | relative_url }}">Download resume <span>(PDF)</span></a>
+</nav>
+<p class="resume-version">PDF version: {% include resume-version.html %}. <a href="{{ '/resume/' | relative_url }}">Document details</a>.</p>
+
+<section class="profile-section" aria-labelledby="experience-heading">
+  <h2 id="experience-heading">Experience</h2>
+  <div class="experience-heading">
+    <h3>IC Verification Engineer</h3>
+    <p>Phison Electronics Corp. · Joined March 2021</p>
+  </div>
+  <ul class="profile-list">
+    <li>Develop verification plans and test cases for FPGA and ASIC designs.</li>
+    <li>Investigate failures, refine test vectors, and test cross-IP interactions.</li>
+    <li>Collaborate with firmware, hardware, and SoC teams on debugging and failure analysis.</li>
+  </ul>
+  <a class="section-link" href="{{ '/cv/#experience' | relative_url }}">Experience in detail</a>
+</section>
+
+<section class="profile-section" aria-labelledby="expertise-heading">
+  <h2 id="expertise-heading">Technical focus</h2>
+  <dl class="profile-skills">
+    <div><dt>Programming</dt><dd>C and Python; additional experience with C++ and Assembly.</dd></div>
+    <div><dt>Memory &amp; platforms</dt><dd>DDR SDRAM, FPGA, ASIC, ARM Cortex, and JEDEC specification study.</dd></div>
+    <div><dt>Verification &amp; debugging</dt><dd>Test planning, cross-IP functional testing, failure analysis, Git, Linux, and oscilloscope-based debugging.</dd></div>
+  </dl>
+</section>
+
+<section class="profile-section" aria-labelledby="background-heading">
+  <h2 id="background-heading">Education &amp; selected work</h2>
+  <h3>Computer Science · National Chiao Tung University</h3>
+  <p>My final-year project explored Rubik’s Cube solution guidance using image processing, deep reinforcement learning, and augmented reality.</p>
+  <a class="section-link" href="{{ '/cv/#education-projects' | relative_url }}">Education, project, and leadership</a>
+</section>
+
+<section class="profile-section profile-closing" aria-labelledby="connect-heading">
+  <h2 id="connect-heading">Get in touch</h2>
+  <p><a href="{{ '/about/' | relative_url }}">Contact me</a> by email, LinkedIn, or GitHub. You can also browse my <a href="{{ '/blog/' | relative_url }}">writing archive</a>.</p>
+</section>

@@ -1,7 +1,12 @@
 # Site settings. Restart the local Jekyll server after changing this file.
 title: "KennyLongSheng"
+lang: en
 email: kennylongsheng@gmail.com
-description: "Engineering, learning, and personal projects."
+description: "Lee Long Sheng. DRAM firmware, IC verification, and engineering experience."
+
+# Update these two values together when publishing a newer resume PDF.
+resume_pdf: /assets/documents/cv-04-2025.pdf
+resume_version: "April 2025"
 baseurl: ""
 url: "https://kennylongsheng.github.io"
 github_username: kennylongsheng
@@ -14,6 +19,7 @@ plugins:
 
 header_pages:
   - cv.markdown
+  - resume.markdown
   - blog.markdown
   - about.markdown
 

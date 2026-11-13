@@ -1,10 +1,12 @@
+{%- assign current_lang = page.lang | default: site.lang | default: 'en' -%}
+{%- assign locale = site.data.locales[current_lang] -%}
 <footer class="site-footer">
   <div class="wrapper footer-inner">
     <p>{{ site.title | escape }}</p>
-    <nav class="footer-links" aria-label="Contact links">
+    <nav class="footer-links" aria-label="{{ locale.contact_links | escape }}">
       <a href="https://www.linkedin.com/in/kennylongsheng/">LinkedIn</a>
       <a href="https://github.com/{{ site.github_username | escape }}">GitHub</a>
-      <a href="mailto:{{ site.email | escape }}">Email</a>
+      <a href="mailto:{{ site.email | escape }}">{{ locale.email | escape }}</a>
     </nav>
   </div>
 </footer>
