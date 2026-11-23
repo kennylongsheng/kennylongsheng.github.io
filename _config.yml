@@ -2,11 +2,13 @@
 title: "KennyLongSheng"
 lang: en
 email: kennylongsheng@gmail.com
-description: "Lee Long Sheng. DRAM firmware, IC verification, and engineering experience."
+description: "Lee Long Sheng. DRAM controller firmware, interface training, validation, and failure analysis."
 
-# Update these two values together when publishing a newer resume PDF.
-resume_pdf: /assets/documents/cv-04-2025.pdf
-resume_version: "April 2025"
+# Current approved documents. Keep the supplied filenames and shared version date.
+resume_pdf: /assets/documents/resume-11-2026-dram-firmware.pdf
+resume_validation_pdf: /assets/documents/resume-11-2026-dram_validation.pdf
+cv_pdf: /assets/documents/cv_11_2026.pdf
+resume_version: "November 2026"
 baseurl: ""
 url: "https://kennylongsheng.github.io"
 github_username: kennylongsheng
@@ -18,7 +20,6 @@ plugins:
   - jekyll-redirect-from
 
 header_pages:
-  - cv.markdown
   - resume.markdown
   - blog.markdown
   - about.markdown

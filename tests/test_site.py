@@ -1,5 +1,6 @@
 """Source checks for the Jekyll site. Run: python3 -m unittest discover -s tests -v."""
 from pathlib import Path
+import os
 import re
 import unittest
 
@@ -7,14 +8,34 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 class SiteTests(unittest.TestCase):
+    def test_publishable_pdfs_have_only_asset_locations(self):
+        outside_assets = []
+        excluded = {'.git', '.hermes', '_site', '.sass-cache', '.jekyll-cache', '__pycache__', 'Personal'}
+        for folder, directories, filenames in os.walk(ROOT):
+            directories[:] = [name for name in directories if name not in excluded]
+            for name in filenames:
+                if name.lower().endswith('.pdf'):
+                    relative = (Path(folder) / name).relative_to(ROOT)
+                    if relative.parts[0] != 'assets':
+                        outside_assets.append(str(relative))
+        self.assertEqual(outside_assets, [], 'Public PDF sources belong under assets/')
+
+    def test_resume_is_the_only_professional_navigation_entry(self):
+        config = (ROOT / '_config.yml').read_text()
+        header = config.split('header_pages:\n', 1)[1].split('\n\n', 1)[0]
+        self.assertEqual(header.splitlines(), [
+            '  - resume.markdown', '  - blog.markdown', '  - about.markdown'])
+
     def test_resume_has_stable_route_and_shared_download(self):
         page = ROOT / 'resume.markdown'
         self.assertTrue(page.is_file(), 'A stable resume download page must exist')
         source = page.read_text()
         self.assertIn('permalink: /resume/', source)
-        self.assertIn('site.resume_pdf', source)
-        self.assertIn('{% include resume-version.html %}', source)
+        self.assertIn('{% include resume-downloads.html %}', source)
         config = (ROOT / '_config.yml').read_text()
+        download = (ROOT / '_includes/resume-downloads.html').read_text()
+        self.assertIn('site.resume_pdf', download)
+        self.assertIn('{% include resume-version.html %}', download)
         self.assertIn('  - resume.markdown', config)
         match = re.search(r'^resume_pdf: (.+)$', config, re.M)
         assert match is not None, 'Missing resume_pdf configuration'
@@ -26,7 +47,6 @@ class SiteTests(unittest.TestCase):
     def test_bilingual_page_pairs(self):
         for english, chinese, key in [
             ('index.html', 'zh/index.html', 'home'),
-            ('cv.markdown', 'zh/cv.markdown', 'cv'),
             ('resume.markdown', 'zh/resume.markdown', 'resume'),
             ('about.markdown', 'zh/about.markdown', 'about'),
             ('blog.markdown', 'zh/blog.markdown', 'blog'),
@@ -54,8 +74,6 @@ class SiteTests(unittest.TestCase):
         source = (ROOT / 'index.html').read_text()
         self.assertTrue(source.startswith('---\nlayout: page\n'))
         self.assertNotRegex(source.lower(), r'<!doctype|</?(?:html|head|body)\b')
-        self.assertIn("'/blog/' | relative_url", source)
-        self.assertIn("'/about/' | relative_url", source)
         self.assertIn("'/assets/images/profile-small.jpg' | relative_url", source)
         self.assertIn('engineer', source.lower())
 
@@ -95,20 +113,18 @@ class SiteTests(unittest.TestCase):
         self.assertIn('  - Personal\n', exclusions)
         self.assertIn('/Personal/\n', (ROOT / '.gitignore').read_text())
 
-    def test_cv_page_links_to_dated_pdf_and_is_in_navigation(self):
-        page = ROOT / 'cv.markdown'
-        self.assertTrue(page.is_file(), 'The CV page must exist')
+    def test_resume_owns_professional_content_and_legacy_pdf_is_preserved(self):
+        page = ROOT / 'resume.markdown'
+        self.assertTrue(page.is_file(), 'The Resume page must exist')
         source = page.read_text()
-        self.assertIn('permalink: /cv/', source)
-        self.assertIn('site.resume_pdf', source)
-        self.assertIn('{% include resume-version.html %}', source)
+        self.assertIn('permalink: /resume/', source)
+        self.assertIn('{% include resume-downloads.html %}', source)
         self.assertIn('## Experience {#experience}', source)
-        self.assertIn('## Education & selected project {#education-projects}', source)
-        self.assertIn("'/cv/' | relative_url", (ROOT / 'index.html').read_text())
-        self.assertIn('  - cv.markdown', (ROOT / '_config.yml').read_text())
-        legacy = (ROOT / 'CV_version/04_2025.pdf').read_bytes()
+        self.assertIn('## Education {#education-projects}', source)
+        self.assertIn("'/resume/' | relative_url", (ROOT / 'index.html').read_text())
+        self.assertNotIn('  - cv.markdown', (ROOT / '_config.yml').read_text())
+        legacy = (ROOT / 'assets/documents/cv-04-2025.pdf').read_bytes()
         self.assertTrue(legacy.startswith(b'%PDF-'))
-        self.assertEqual((ROOT / 'assets/documents/cv-04-2025.pdf').read_bytes(), legacy)
 
 
 if __name__ == '__main__':

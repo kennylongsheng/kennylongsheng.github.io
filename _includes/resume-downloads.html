@@ -1,0 +1,19 @@
+<section id="documents" aria-labelledby="documents-heading">
+  {%- if page.lang == 'zh-Hant' -%}
+    <h2 id="documents-heading">履歷與 CV 下載</h2>
+    <p>英文 PDF · {% include resume-version.html %}。</p>
+    <ul>
+      <li><a href="{{ site.resume_pdf | relative_url }}">韌體履歷（PDF）</a>：DRAM 初始化、介面訓練與裸機 C 韌體開發。</li>
+      <li><a href="{{ site.resume_validation_pdf | relative_url }}">驗證履歷（PDF）</a>：DRAM 特性分析、訓練驗證與失效調查。</li>
+      <li><a href="{{ site.cv_pdf | relative_url }}">完整 CV（PDF）</a>：較完整的工作經歷、技術背景、學歷與專題。</li>
+    </ul>
+  {%- else -%}
+    <h2 id="documents-heading">Resumes &amp; Full CV</h2>
+    <p>English PDFs · {% include resume-version.html %}.</p>
+    <ul>
+      <li><a href="{{ site.resume_pdf | relative_url }}">Firmware resume (PDF)</a>: DRAM initialization, interface training, and bare-metal C development.</li>
+      <li><a href="{{ site.resume_validation_pdf | relative_url }}">Validation resume (PDF)</a>: DRAM characterization, training validation, and failure investigation.</li>
+      <li><a href="{{ site.cv_pdf | relative_url }}">Full CV (PDF)</a>: broader professional experience, technical background, education, and projects.</li>
+    </ul>
+  {%- endif -%}
+</section>

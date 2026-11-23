@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | escape }}">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ page.title | escape }} | {{ site.title | escape }}</title>
+    <link rel="canonical" href="{{ page.redirect_target | absolute_url }}">
+    <meta name="robots" content="noindex">
+    <noscript><meta http-equiv="refresh" content="0; url={{ page.redirect_target | relative_url }}"></noscript>
+  </head>
+  <body>
+    <p><a id="resume-redirect" href="{{ page.redirect_target | relative_url }}">{{ page.redirect_label | escape }}</a></p>
+    <script>
+      window.location.replace(document.getElementById('resume-redirect').href + window.location.hash);
+    </script>
+  </body>
+</html>

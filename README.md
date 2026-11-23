@@ -1,49 +1,59 @@
 # Bilingual professional website
 
-CV-focused website for Lee Long Sheng, built with Jekyll/Minima. English and Traditional Chinese pages share navigation, language switching, and resume configuration.
+Job-focused website for Lee Long Sheng, built with Jekyll/Minima. English and Traditional Chinese pages share navigation, page-matched language switching, and one resume download configuration.
 
 ## Routes and language ownership
 
 | Content | English | Traditional Chinese |
 | --- | --- | --- |
 | Home | `/` | `/zh-tw/` |
-| Full CV | `/cv/` | `/zh-tw/cv/` |
-| Resume download | `/resume/` | `/zh-tw/resume/` |
+| Resume and PDF download | `/resume/` | `/zh-tw/resume/` |
 | Contact | `/about/` | `/zh-tw/about/` |
 | Writing | `/blog/` | `/zh-tw/blog/` |
 | Not found | `/404.html` | `/zh-tw/404.html` |
 
-English page sources stay at the root; Chinese sources live in `zh/` with explicit `/zh-tw/` permalinks. Paired pages share a unique `translation_key` and declare `lang: en` or `lang: zh-Hant`. These fields drive header switches and reciprocal alternate-language metadata. Site title links to the current language's homepage.
+`/cv/` and `/zh-tw/cv/` redirect to the matching Resume page. The small `_layouts/legacy-redirect.html` preserves section fragments for normal JavaScript-enabled navigation and provides a no-JavaScript redirect/link fallback. Former CV section IDs remain on Resume. CV aliases are not separate translations or navigation entries.
 
-`header_pages` in `_config.yml` owns navigation order. `_includes/header.html` resolves each listed English page to its same-key counterpart in the current language. Add a translated counterpart when adding a new navigation page. `_data/locales.yml` owns shared UI labels. Minima's default layout already uses `page.lang` for the HTML language, so it is not copied.
+English sources stay at the root; Chinese sources live in `zh/` with explicit `/zh-tw/` permalinks. Paired content pages share a unique `translation_key` and declare `lang: en` or `lang: zh-Hant`. Native language links open the matching page. The site-title link opens the current language's homepage.
 
-The switch is ordinary links, not a JavaScript translation overlay or automatic redirect. Deep links retain the requested language. Existing posts are unmodified and retain their original language; both blog listings state this. On an untranslated post, the Chinese option explicitly opens the Chinese article listing, not an advertised translation of that post. Such posts do not receive alternate-language metadata pointing at a listing.
+`header_pages` in `_config.yml` owns the three-link navigation order: Resume, Blog, Contact. `_includes/header.html` resolves each source to its same-key/current-language counterpart. `_data/locales.yml` owns shared UI labels. Minima's default layout consumes `page.lang`.
 
-`_includes/head.html` retains Minima's SEO, RSS, CSS and optional analytics integration, adding reciprocal `hreflang` and English `x-default` only for real page pairs. `_layouts/home.html` only localizes blog listing chrome.
+`_includes/head.html` retains SEO/RSS/CSS integration and adds reciprocal `hreflang` plus English `x-default` only for actual translations. Existing posts remain in their original language; the Chinese option on an untranslated post explicitly opens the Chinese article listing, not a claimed translation. `_layouts/home.html` localizes listing chrome.
 
 ## Content and public assets
 
-- Homepage: concise engineering overview, selected experience, strengths, and links to the full CV and PDF.
-- CV: fuller supported professional background, education/project, activities, languages and contact.
-- Resume page: stable download entry with the actual PDF version date.
-- `resume_pdf` and `resume_version` in `_config.yml` are the single current download/date owner. When publishing an approved replacement, update both settings together and retain older PDF URLs. `_includes/resume-version.html` formats the same date in Chinese, without a separate date setting.
-- The PDF remains the existing April 2025 English/Chinese document. HTML revisions do not update its contents. No new or comparison PDF is published.
-- `assets/images/profile-small.jpg` is the existing public portrait. Do not copy full-size originals into public assets.
-- `CV_version/04_2025.pdf` remains a byte-identical compatibility copy of `assets/documents/cv-04-2025.pdf`, preserving the legacy download URL.
-- Git ignore and Jekyll exclusion rules for private originals and local notes remain intact. Do not commit private documents or `.hermes/`.
+- Homepage: concise DRAM-validation/firmware overview, Phison experience, relevant skills, education, contact, and resume/PDF actions.
+- Resume: professional summary, official job titles and promotion dates, technical skills, education/project, activities, languages, and contact. It replaces the former separate CV and download landing pages.
+- Current approved files live directly in `assets/documents/`; no extra 2026 source/public duplicate is needed.
+- `_config.yml` owns `resume_pdf` (firmware resume), `resume_validation_pdf` (validation resume), `cv_pdf` (full CV), and their shared `resume_version`. Preserve supplied filenames, including the underscore in `resume-11-2026-dram_validation.pdf`.
+- Both homepages keep the owner's inline arrangement: View Resume (or 查看履歷) beside the language/version note and Other Resumes & Full CV (or 其他履歷與完整 CV). Shared spacing rules align the row and allow supporting text to wrap on narrow screens without moving it outside the row. The links open the matching Resume page and `#documents`; PDFs and version details also remain in the shared Resume download section.
+- Both languages share 16px body text, 24px section headings, 20px subheadings/list titles and semibold emphasis across Home, Resume, Contact, Blog and project content. Resume retains detailed career information while matching the homepage's role/date presentation and technical labels. Both homepages end with direct Email, LinkedIn and GitHub links; the project article remains in its original English and Chinese project links identify its language.
+- All three current PDFs are English-only and remain unchanged. Phone numbers remain in the supplied PDFs with the owner's permission; HTML contact sections do not repeat them.
+- All public PDFs live only in `assets/documents/`. The archived April 2025 document remains at `assets/documents/cv-04-2025.pdf`; the duplicate `CV_version/` directory is retired. Internal PDF links must target assets. Previously shared `/CV_version/04_2025.pdf` links are not preserved by this consolidation and will return 404 after deployment; no HTML redirect is placed at a `.pdf` URL.
+- Historical project notes are kept locally in `.hermes/handoff/`; the redundant root `memory.md` is retired. Backups and exact removal reports live in `.hermes/backups/` and must not be published.
+- `assets/images/profile-small.jpg` is the public portrait. Full-size originals stay local. Git ignore and Jekyll exclusions serve different purposes; preserve both.
+- `.hermes/`, `Personal/`, development notes, tests, and local scripts must not appear in generated website output.
 
 ## Preview
 
-From the repository, using the existing user-installed Jekyll:
+From this repository, using the existing user-installed Jekyll:
 
 ```sh
 "$HOME/.gem/ruby/2.6.0/bin/jekyll" serve --host 127.0.0.1 --port 4174
 ```
 
-Use a free port; do not stop someone else's preview. The server watches the directory it was started from. Restart after `_config.yml` changes.
+Use a free port and do not stop someone else's preview. Restart after `_config.yml` changes. A running server watches the directory it was started from.
 
 ## Verification and publication
 
-Run `python3 -m unittest discover -s tests -v` and build with real Jekyll before publishing. Check rendered language pairs, alternate-language metadata, local links/fragments, routes/redirects, RSS, PDF-byte integrity, private-file exclusions and a nonempty-baseurl variant.
+```sh
+python3 -m unittest discover -s tests -v
+"$HOME/.gem/ruby/2.6.0/bin/jekyll" build --destination /path/to/disposable-output
+python3 tests/verify_build.py /path/to/disposable-output
+```
 
-Review visual changes before publication. Local editing, a successful preview, and committing are separate from pushing to GitHub. A push to the configured publishing branch may trigger GitHub Pages deployment.
+Also build with `--baseurl /verification` and pass `/verification` as the verifier's second argument. Use canonical paths in the configured Hermes scratch directory for disposable copies. Verify legacy CV redirects in a browser, including fragments, desktop/mobile layout, bilingual switches and the current download.
+
+The two Jekyll starter posts were removed with local backups at the owner's request. The remaining final-year-project post uses the explicit, date-independent permalink `/blog/rubiks-cube-solving-guides-with-ar/`. Its visible work-in-progress notice remains until the owner fills in the article. No site timezone change is needed for that stable project URL.
+
+Local edits and verification do not authorize staging, committing, pushing, or publishing. Review the diff before a separately authorized Git update.
